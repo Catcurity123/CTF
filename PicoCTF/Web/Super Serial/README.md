@@ -181,7 +181,7 @@ if(isset($perm) && $perm->is_admin()){
 
 This is a [deserialization vulnerabilities](https://portswigger.net/web-security/deserialization). We can see that any object stored in `login` cookie will be unserialized and pass onto `try` block where it will be tested `is_admin` or `is_guest`.
 
-From the hint, we know that our flag is in `../flag` ,but we need to print it out. The above block of code shows that if our object is neither guest or admin, it will print out `$perm`, which is our solution.
+From the hint, we know that our flag is in `../flag` ,but we need to print it out. The above block of code shows that if our object is neither guest nor admin, it will print out `$perm`, which is our solution.
 
 Therefore, we only need to serialize our `access_log` object, which looks like this `O:10:"access_log":1:{s:8:"log_file";s:7:"../flag";}`. For more information on how this syntax actually work, visit [this medium article](https://l.facebook.com/l.php?u=https%3A%2F%2Fmedium.com%2Fswlh%2Fexploiting-php-deserialization-56d71f03282a%3Ffbclid%3DIwAR2lIRaZ1oX4ipHxNHFC29arCtw4qFwuAH881BC8RGgkrw6p60m85i_sj24&h=AT1sdTPhl8StwAA7-iIgJD8YQgqTXq6pwevovfc7AvamFxFPbaU5ELg5feywhelmdDl3WIlAURhFugdQnfTZFTOUUWlNEklC-0W-OR3sJD9MPr1NU4jVUbKkLtFgN2dmzXejbA).
 
