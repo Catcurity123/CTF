@@ -13,7 +13,7 @@ From the description, we know that this site use the Flask session to "encode" t
 eyJ2ZXJ5X2F1dGgiOiJibGFuayJ9.Y5s-Bw.kfx9C1txle5Kuc0lujp_-C_fiAY
 ```
 
-The code provided in `server.py` also worthnoticing:
+The code provided in `server.py` also worth noticing:
 
 ```python 
 cookie_names = ["snickerdoodle", "chocolate chip", "oatmeal raisin", "gingersnap", "shortbread", "peanut butter", "whoopie pie", "sugar", "molasses", "kiss", "biscotti", "butter", "spritz", "snowball", "drop", "thumbprint", "pinwheel", "wafer", "macaroon", "fortune", "crinkle", "icebox", "gingerbread", "tassie", "lebkuchen", "macaron", "black and white", "white chocolate macadamia"]
