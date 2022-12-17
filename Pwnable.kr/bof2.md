@@ -65,7 +65,7 @@ When disassembling the `func` function, we can notice a `cmp` function:
 
 ![func disassemble](https://github.com/Catcurity123/CTF/blob/main/picture/1.png)
 
-#### Therefore, we just need t place a break point at this function to examine the location and value of `ebp + 8` to find the offset to overflow.
+#### Therefore, we just need to place a break point at this function to examine the location and value of `ebp + 8` to find the offset to overflow.
 To make our work even easier, `pwntools` offers cyclic to find offset way faster:
 
 ```
