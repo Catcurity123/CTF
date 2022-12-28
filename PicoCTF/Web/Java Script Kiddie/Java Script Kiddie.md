@@ -64,43 +64,43 @@ Let's take a look at the source code.
 ```javascript
 var bytes = [];
       //take the bytes file 
-			$.get("bytes", function(resp) {
-				bytes = Array.from(resp.split(" "), x => Number(x));
-			});
+	$.get("bytes", function(resp) {
+	bytes = Array.from(resp.split(" "), x => Number(x));
+	});
       
       //scramble the png file 
-			function assemble_png(user_input){
-				var KEY_LENGTH = 16;
-				var key = "0000000000000000"; //initiate key as a string
-				var shifter; //declare shifter
+	function assemble_png(user_input){
+	 var KEY_LENGTH = 16;
+	 var key = "0000000000000000"; //initiate key as a string
+	 var shifter; //declare shifter
 
         //check user input equal to 16
-				if(user_input.length == KEY_LENGTH){
-					key = user_input;
-				}
+	 if(user_input.length == KEY_LENGTH){
+		key = user_input;
+	}
 
         //scramble value
-				var result = [];
+	 var result = [];
         //get the integer value of key at i
-				for(var key_position = 0; key_position < KEY_LENGTH; key_position++){
+	 for(var key_position = 0; key_position < KEY_LENGTH; key_position++){
           //make shifter calculatable by storing them as integer
-					shifter = key.charCodeAt(key_position) - 48;
+	    shifter = key.charCodeAt(key_position) - 48;
 
           //loop (bytes length / 16) times => making (byte length / 16) blocks of 16 value and assign them base on the shifter
-					for(var j = 0; j < (bytes.length / KEY_LENGTH); j ++){
-						var result_index = (j *  INPUT_LENGTH) + key_position;
-            var bytes_index = (((j + shifter) *  INPUT_LENGTH) % bytes.length) + key_position;
-						result[result_index] = bytes[bytes_index]
-					}
-				}
+	  for(var j = 0; j < (bytes.length / KEY_LENGTH); j ++){
+		var result_index = (j *  INPUT_LENGTH) + key_position;
+                var bytes_index = (((j + shifter) *  INPUT_LENGTH) % bytes.length) + key_position;
+		result[result_index] = bytes[bytes_index]
+	}
+	}
         // get rid of the remaining 0
-				while(result[result.length-1] == 0){
-					result = result.slice(0,result.length-1);
-				}
+	  while(result[result.length-1] == 0){
+		result = result.slice(0,result.length-1);
+	}
         // encode the picture using base64
-				document.getElementById("Area").src = "data:image/png;base64," + btoa(String.fromCharCode.apply(null, new Uint8Array(result)));
-				return false;
-			}
+	  document.getElementById("Area").src = "data:image/png;base64," + btoa(String.fromCharCode.apply(null, new Uint8Array(result)));
+		return false;
+	}
 ```
 #### 1.2 Before diving in the code. let's take an overview of what the code actually does:
 
@@ -125,9 +125,9 @@ With that being said let's return to our javascript code.
 ``` javascript
 var bytes = [];
       //take the bytes file 
-			$.get("bytes", function(resp) {
-				bytes = Array.from(resp.split(" "), x => Number(x));
-			});
+$.get("bytes", function(resp) {
+bytes = Array.from(resp.split(" "), x => Number(x));
+});
 ```
 
 We can see that the variable `bytes` takes data from somewhere in the web, we can find the data source via `developer tools`:
@@ -150,13 +150,13 @@ The problem can now be over if we just enter `4894748485167104`; however, for th
 
 ``` javascript
 function assemble_png(user_input){
-				var KEY_LENGTH = 16;
-				var key = "0000000000000000"; //initiate key as a string
-				var shifter; //declare shifter
+	var KEY_LENGTH = 16;
+	var key = "0000000000000000"; //initiate key as a string
+	var shifter; //declare shifter
 
-				if(user_input.length == KEY_LENGTH){
-					key = user_input;
-				}
+	if(user_input.length == KEY_LENGTH){
+	key = user_input;
+}
 ```
 The code above is fairly simple, it declares some variable that we will use later on and check if user input is equal to 16.
 
@@ -204,12 +204,12 @@ The `result` will be appended vertically based on the `shifter` of `byte_index` 
 
 ``` javascript
 while(result[result.length-1] == 0){
-					result = result.slice(0,result.length-1);
-				}
-        // encode the picture using base64
-				document.getElementById("Area").src = "data:image/png;base64," + btoa(String.fromCharCode.apply(null, new Uint8Array(result)));
-				return false;
-			}
+result = result.slice(0,result.length-1);
+}
+// encode the picture using base64
+document.getElementById("Area").src = "data:image/png;base64," + btoa(String.fromCharCode.apply(null, new Uint8Array(result)));
+return false;
+}
 ```
 
 The last part of the code is not so difficult, it will remove any redundant 0s and encrypt the `original picture` using `base64` and the `result` that we got from the code above.
