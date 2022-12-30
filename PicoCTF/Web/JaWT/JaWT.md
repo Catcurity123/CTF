@@ -61,20 +61,25 @@ The web provide us with an input box and some scattered information regarding Ja
 The provided source code doesn't help that much, static analysis would not help ether, let's enter some information on `burpsuite` to see what happen.
 
 #### 1.1 From the provided information, we know that the username should be `admin` so let's try that first.
+
 ![admin](https://github.com/Catcurity123/CTF/blob/main/picture/admin.png)
 
 It seems like we can not simply enter admin as our username
 
 #### 1.2 Let's try other username 
+
 ![luan](https://github.com/Catcurity123/CTF/blob/main/picture/luan.png)
 
 Other username such as `luan` or `John` work just fine, when taking a look at the request and response of the web we notice some interesting information.
+
 ![luanJWT](https://github.com/Catcurity123/CTF/blob/main/picture/luanJWT.png)
 
 Apart from the `cloudfare bot management cookie`, we can also see a `JWT` or `JSON Web Token`. From previous challenges, we know that `JWT` allows the client to indicate its identity for further exchange of information after authentication. Using [jwt.io](jwt.io) we debug the token to see its information.
+
 ![Jwt.io](https://github.com/Catcurity123/CTF/blob/main/picture/Jwt.io.png)
 
 How about forging another token with the username `admin` in [Jwt.io](jwt.io)?
+
 ![adminjwt](https://github.com/Catcurity123/CTF/blob/main/picture/adminJWT.png)
 
 ![testweb](https://github.com/Catcurity123/CTF/blob/main/picture/webtest.png)
@@ -92,6 +97,7 @@ eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjoiYWRtaW4ifQ.gtqDl4jVDvNbEe_JYEZT
 ```
 
 Finally we can use `burpsuite` to send this `jwt` to the server and obtain the flag.
+
 ![flag](https://github.com/Catcurity123/CTF/blob/main/picture/flag.png)
 
 
